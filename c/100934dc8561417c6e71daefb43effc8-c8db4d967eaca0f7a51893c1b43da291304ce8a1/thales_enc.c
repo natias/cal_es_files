@@ -108,7 +108,7 @@ void writeToHsm(char*buffer){
 char*readFromHsm(){
 }
 
-char * encrypt_on_hsm(char*token);
+char * encrypt_on_hsm(char*token, char* address,int port);
 
 char * dsc2cstr( struct dsc$descriptor_s  *desc)
 {
@@ -165,7 +165,27 @@ char*help;
  
  }
 
+//https://codereview.stackexchange.com/q/29198
+char *randstring(size_t length) {
 
+    static char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!";        
+    char *randomString = NULL;
+
+    if (length) {
+        randomString = malloc(sizeof(char) * (length +1));
+
+        if (randomString) {            
+            for (int n = 0;n < length;n++) {            
+                int key = rand() % (int)(sizeof(charset) -1);
+                randomString[n] = charset[key];
+            }
+
+            randomString[length] = '\0';
+        }
+    }
+
+    return randomString;
+}
 
 main()
 {
@@ -188,7 +208,16 @@ main()
                           struct dsc$descriptor_s  *operation,
 
                          struct dsc$descriptor_s  *authentication)
-{}
+{
+
+
+
+
+
+
+
+}
+
 
  
 
